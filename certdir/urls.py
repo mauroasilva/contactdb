@@ -16,6 +16,8 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'tags', views.TagViewSet)
 router.register(r'asns', views.ASNViewSet)
+router.register(r'inetnums', views.InetnumViewSet)
+
 
 urlpatterns = patterns(
     '',
@@ -26,4 +28,7 @@ urlpatterns = patterns(
     url(r'^api-token-auth/',
         'rest_framework.authtoken.views.obtain_auth_token'),
     url(r'^admin/', include(admin.site.urls)),
+
+#    url(r'^whois/(?P<ip>[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$', views.InetnumWhoisView.as_view()),
+#    url(r'^subnets/(?P<cidr>[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/[0-9]{1,3})$', views.InetnumSubnetsView.as_view()),
 )

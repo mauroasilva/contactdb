@@ -33,6 +33,9 @@ from contactdb.serializers import TagSerializer
 from contactdb.models import ASN
 from contactdb.serializers import ASNSerializer
 
+from contactdb.models import Inetnum
+from contactdb.serializers import InetnumSerializer
+
 import gnupg
 import os
 
@@ -124,3 +127,35 @@ class ASNViewSet(viewsets.ModelViewSet):
     """
     queryset = ASN.objects.all()
     serializer_class = ASNSerializer
+
+class InetnumViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows tags to be viewed or edited.
+    """
+    queryset = Inetnum.objects.all()
+    serializer_class = InetnumSerializer
+
+'''
+class InetnumWhoisView(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, ) # TODO: Change this to better object-level protection
+    serializer_class = InetnumSerializer
+    def get_queryset(self, ip):
+        return Inetnum.objects.filter(init_ip__lte=ip).filter(end_ip__gte=ip).reverse()[:1]
+        
+    def get(self, request, ip):
+        queryset = self.get_queryset(ip)
+        serializer = InetnumSerializer(queryset)
+        return Response(serializer.data)
+        
+class InetnumSubnetsView(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, ) # TODO: Change this to better object-level protection
+    serializer_class = InetnumSerializer
+    def get_queryset(self, cidr):
+        (init_ip, end_ip) = Inetnum.inet_borders(cidr)
+        return Inetnum.objects.filter(init_ip__gte=init_ip).filter(end_ip__lte=end_ip)
+        
+    def get(self, request, cidr):
+        queryset = self.get_queryset(cidr)
+        serializer = InetnumSerializer(queryset)
+        return Response(serializer.data)
+'''

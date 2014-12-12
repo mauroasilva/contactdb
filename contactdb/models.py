@@ -61,7 +61,7 @@ class Tag(Model):
 
 
 class Entity(Model):
-    name = CharField(max_length=50)
+    name = CharField(max_length=50, primary_key=True)
     long_name = CharField(max_length=1000, null=True, blank=True)
 
     ####################

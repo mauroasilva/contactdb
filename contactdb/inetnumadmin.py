@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib import admin
 from contactdb.models import Inetnum
+from django.core.exceptions import ValidationError
 
 class InetnumFormField(forms.GenericIPAddressField):
     def validate_ipv46_address(self, value):
         from django.core.validators import validate_ipv4_address, validate_ipv6_address
+        
         try:
             validate_ipv4_address(value)
             return 'ipv4'
@@ -22,7 +24,8 @@ class InetnumFormField(forms.GenericIPAddressField):
 
             if prot is 'ipv4':
                 try:
-                    ipv4_prefix = int(splitted[1])
+                    ipv4_prefix = int(splitted[1
+])
                     if ipv4_prefix < 0 or ipv4_prefix > 32:
                         raise ValidationError(_('IPv4 prefix is not valid.'), code='invalid')
                 except:

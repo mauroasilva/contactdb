@@ -7,6 +7,7 @@ from contactdb.models import Countrycode
 from contactdb.models import Source
 from contactdb.models import Tag
 from contactdb.models import ASN
+from contactdb.models import Inetnum
 
 
 class CountrycodeSerializer(serializers.ModelSerializer):
@@ -27,14 +28,14 @@ class OrganisationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Organisation
-        fields = ('id', 'name', 'long_name', 'countrycodes', 'address', 'email', 'pgp_fingerprint', 'phone_number', 'url', 'business_hh_start', 'business_hh_end', 'comment', 'tags', 'date_established', 'confirmed', 'active', 'ti_url', 'first_url')
+        fields = ('name', 'long_name', 'countrycodes', 'address', 'email', 'pgp_fingerprint', 'phone_number', 'url', 'business_hh_start', 'business_hh_end', 'comment', 'tags', 'date_established', 'confirmed', 'active', 'ti_url', 'first_url')
 
 
 class PersonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Person
-        fields = ('id', 'name', 'long_name', 'user', 'countrycodes', 'email', 'pgp_fingerprint', 'phone_number', 'jabber_handle', 'organisations', 'picture', 'comment', 'tags')
+        fields = ('name', 'long_name', 'user', 'countrycodes', 'email', 'pgp_fingerprint', 'phone_number', 'jabber_handle', 'organisations', 'picture', 'comment', 'tags')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -63,3 +64,9 @@ class ASNSerializer(serializers.ModelSerializer):
     class Meta:
         model = ASN
         fields = ('asn', 'owners', 'source', 'active', )
+
+class InetnumSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Inetnum
+        fields = ('inet', 'prefix_length', 'init_ip', 'end_ip', 'owners', 'source', 'active', )

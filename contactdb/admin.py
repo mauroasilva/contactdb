@@ -29,7 +29,7 @@ class PersonAdminPage(admin.ModelAdmin):
     filter_horizontal = ['countrycodes', 'tags']
     fields = ('name', 'long_name', 'user', 'countrycodes',
               ('email', 'pgp_fingerprint'), 'phone_number',
-              'jabber_handle', 'organisation', 'picture', 'comment', 'tags')
+              'jabber_handle', 'organisations', 'picture', 'comment', 'tags')
     search_fields = ['name', 'user', 'email']
     inlines = [createInlineAdmin(OTRFingerprint),
                createInlineAdmin(OtherCommunicationChannel), ]
@@ -38,7 +38,7 @@ class PersonAdminPage(admin.ModelAdmin):
 
 
 class ASNAdminPage(admin.ModelAdmin):
-    fields = ('asn', 'asname', 'owner', 'source')
+    fields = ('asn', 'asname', 'owners', 'source')
     search_fields = ['asn', 'asname']
 
 admin.site.register(Organisation, OrganisationAdminPage)
