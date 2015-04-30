@@ -17,10 +17,10 @@ class IsUserOrReadOnly(permissions.BasePermission):
 
 
 class IsInOrgOrReadOnly(permissions.BasePermission):
-
     def has_object_permission(self, request, view, obj):
         # Read permissions are allowed to any request
         if request.method in permissions.SAFE_METHODS:
             return True
+
         return request.user.is_staff or \
             Group.objects.get(name=obj.name) in request.user.groups.all()

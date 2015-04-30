@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from contactdb.models import Entity
 from contactdb.models import Person
 from contactdb.models import Organisation
 from contactdb.models import Countrycode
@@ -66,7 +67,9 @@ class ASNSerializer(serializers.ModelSerializer):
         fields = ('asn', 'owners', 'source', 'active', )
 
 class InetnumSerializer(serializers.ModelSerializer):
-
+    
+    
     class Meta:
         model = Inetnum
         fields = ('inet', 'prefix_length', 'init_ip', 'end_ip', 'owners', 'source', 'active', )
+        depth = 1

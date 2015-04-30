@@ -1,13 +1,16 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+
+from rest_framework import generics
 from rest_framework import permissions
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework import viewsets
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+
 from contactdb.permissions import IsUserOrReadOnly
 from contactdb.permissions import IsInOrgOrReadOnly
 from contactdb.serializers import UserSerializer
@@ -135,16 +138,15 @@ class InetnumViewSet(viewsets.ModelViewSet):
     queryset = Inetnum.objects.all()
     serializer_class = InetnumSerializer
 
-'''
 class InetnumWhoisView(generics.GenericAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, ) # TODO: Change this to better object-level protection
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, ) # TODO: Change this to better object-protection level
     serializer_class = InetnumSerializer
     def get_queryset(self, ip):
-        return Inetnum.objects.filter(init_ip__lte=ip).filter(end_ip__gte=ip).reverse()[:1]
+        return Inetnum.objects.filter(init_ip__lte=ip).filter(end_ip__gte=ip).order_by('prefix_length').reverse()[:1]
         
     def get(self, request, ip):
         queryset = self.get_queryset(ip)
-        serializer = InetnumSerializer(queryset)
+        serializer = InetnumSerializer(queryset, many=True)
         return Response(serializer.data)
         
 class InetnumSubnetsView(generics.GenericAPIView):
@@ -156,6 +158,6 @@ class InetnumSubnetsView(generics.GenericAPIView):
         
     def get(self, request, cidr):
         queryset = self.get_queryset(cidr)
-        serializer = InetnumSerializer(queryset)
+        serializer = InetnumSerializer(queryset, many=True)
         return Response(serializer.data)
-'''
+
