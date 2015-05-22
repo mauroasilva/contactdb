@@ -53,3 +53,32 @@ from django.db.models.constants import LOOKUP_SEP
 from django.db.models.sql.constants import QUERY_TERMS
 
 See also this post: http://stackoverflow.com/questions/15408255/cannot-import-name-lookup-sep
+
+==================
+
+https://github.com/mauroasilva/contactdb.git
+
+============================
+
+# Install EPEL
+rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
+# Install Python Package Installer
+yum install python-pip
+
+# Install PostgreSQL 9.2
+yum install postgresql-server
+
+pip install django
+pip install djangorestframework
+pip install psycopg2
+pip install pillow
+pip install gnupg
+
+postgresql-setup initdb
+
+su - postgres -c 'createuser -s contactdb'
+su - postgres -c 'createdb contactdb'
+
+python manage.py migrate auth
+python manage.py migrate
