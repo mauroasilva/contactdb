@@ -1,0 +1,54 @@
+# Install EPEL
+rpm -ivh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
+# Install Required packages
+yum install python-pip python-devel gcc git
+
+# Install PostgreSQL 9.2
+yum install postgresql-server postgresql-devel
+
+# Install python modules
+pip install django
+pip install django-filter
+pip install djangorestframework
+pip install psycopg2
+pip install pillow
+pip install gnupg
+
+# Initiate postgresql database
+postgresql-setup initdb
+
+# Start postgresql service
+systemctl start postgresql
+
+# Create contactdb user and database
+su - postgres -c 'createuser -s contactdb'
+su - postgres -c 'createdb contactdb'
+
+# Clone contactdb repository
+git clone https://github.com/mauroasilva/contactdb.git /opt/contactdb
+
+# Export required environment variables
+export CONTACTDB_HOME=/opt/contactdb
+export GNUPGHOME=$CONTACTDB_HOME/.gnupg
+export PYTHONPATH=$PYTHONPATH:$CONTACTDB_HOME
+export DJANGO_SETTINGS_MODULE='contactdb.settings'
+
+# Start postgresql service
+systemctl restart postgresql
+
+# Change:
+#   local   all             all                                     peer
+#
+# To:
+#   local   all             all                                     trust
+vi /var/lib/pgsql/data/pg_hba.conf
+
+# Initiate contactdb database
+python /opt/contactdb/contactdb/manage.py migrate auth
+python /opt/contactdb/contactdb/manage.py migrate
+python /opt/contactdb/contactdb/manage.py syncdb
+
+python /opt/contactdb/contactdb/manage.py runserver 0.0.0.0:80
+
+# Acess http://192.168.56.101/admin
