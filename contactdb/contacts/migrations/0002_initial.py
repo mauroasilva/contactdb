@@ -9,24 +9,24 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding model 'Countrycode'
-        db.create_table('contactdb_countrycode', (
+        db.create_table('contacts_countrycode', (
             ('cc', self.gf('django.db.models.fields.CharField')(max_length=2, primary_key=True)),
             ('cc3', self.gf('django.db.models.fields.CharField')(max_length=3, null=True, blank=True)),
             ('country_name', self.gf('django.db.models.fields.CharField')(max_length=300)),
         ))
-        db.send_create_signal('contactdb', ['Countrycode'])
+        db.send_create_signal('contacts', ['Countrycode'])
 
         # Adding model 'AirportCode'
-        db.create_table('contactdb_airportcode', (
+        db.create_table('contacts_airportcode', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('code', self.gf('django.db.models.fields.CharField')(max_length=3)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.Countrycode'], null=True, blank=True)),
+            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.Countrycode'], null=True, blank=True)),
         ))
-        db.send_create_signal('contactdb', ['AirportCode'])
+        db.send_create_signal('contacts', ['AirportCode'])
 
         # Adding model 'PGPKey'
-        db.create_table('contactdb_pgpkey', (
+        db.create_table('contacts_pgpkey', (
             ('pgp_key_id', self.gf('django.db.models.fields.CharField')(max_length=1000, primary_key=True)),
             ('pgp_key', self.gf('django.db.models.fields.TextField')()),
             ('pgp_key_email', self.gf('django.db.models.fields.CharField')(max_length=1000)),
@@ -34,19 +34,19 @@ class Migration(SchemaMigration):
             ('pgp_key_created', self.gf('django.db.models.fields.DateTimeField')()),
             ('pgp_key_expires', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
         ))
-        db.send_create_signal('contactdb', ['PGPKey'])
+        db.send_create_signal('contacts', ['PGPKey'])
 
         # Adding model 'Source'
-        db.create_table('contactdb_source', (
+        db.create_table('contacts_source', (
             ('name', self.gf('django.db.models.fields.CharField')(max_length=1000, primary_key=True)),
             ('reliability', self.gf('django.db.models.fields.FloatField')(default=0.0)),
         ))
-        db.send_create_signal('contactdb', ['Source'])
+        db.send_create_signal('contacts', ['Source'])
 
         # Adding model 'Organisation'
-        db.create_table('contactdb_organisation', (
+        db.create_table('contacts_organisation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.Organisation'], null=True, blank=True)),
+            ('parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.Organisation'], null=True, blank=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=1000)),
             ('fullname', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True, blank=True)),
             ('org_path', self.gf('django.db.models.fields.CharField')(max_length=5000, null=True, blank=True)),
@@ -57,7 +57,7 @@ class Migration(SchemaMigration):
             ('pobox', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
             ('city', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('zipcode', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
-            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.Countrycode'])),
+            ('country', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.Countrycode'])),
             ('phone', self.gf('django.db.models.fields.CharField')(max_length=64)),
             ('emergency_phone', self.gf('django.db.models.fields.CharField')(max_length=64, null=True, blank=True)),
             ('fax', self.gf('django.db.models.fields.CharField')(max_length=64, null=True, blank=True)),
@@ -67,126 +67,126 @@ class Migration(SchemaMigration):
             ('business_hh_start', self.gf('django.db.models.fields.TimeField')()),
             ('business_hh_end', self.gf('django.db.models.fields.TimeField')()),
             ('date_established', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('pgp_key', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.PGPKey'], null=True, blank=True)),
+            ('pgp_key', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.PGPKey'], null=True, blank=True)),
             ('confirmed', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('source', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.Source'])),
+            ('source', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.Source'])),
             ('vouching_proposed_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='Proposed by', to=orm['auth.User'])),
             ('ti_url', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True, blank=True)),
             ('first_url', self.gf('django.db.models.fields.CharField')(max_length=1000, null=True, blank=True)),
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('last_updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
-        db.send_create_signal('contactdb', ['Organisation'])
+        db.send_create_signal('contacts', ['Organisation'])
 
         # Adding M2M table for field vouching_vouched_by on 'Organisation'
-        db.create_table('contactdb_organisation_vouching_vouched_by', (
+        db.create_table('contacts_organisation_vouching_vouched_by', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('organisation', models.ForeignKey(orm['contactdb.organisation'], null=False)),
+            ('organisation', models.ForeignKey(orm['contacts.organisation'], null=False)),
             ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
-        db.create_unique('contactdb_organisation_vouching_vouched_by', ['organisation_id', 'user_id'])
+        db.create_unique('contacts_organisation_vouching_vouched_by', ['organisation_id', 'user_id'])
 
         # Adding model 'Person'
-        db.create_table('contactdb_person', (
+        db.create_table('contacts_person', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('organisation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.Organisation'])),
+            ('organisation', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.Organisation'])),
         ))
-        db.send_create_signal('contactdb', ['Person'])
+        db.send_create_signal('contacts', ['Person'])
 
         # Adding model 'NetObject'
-        db.create_table('contactdb_netobject', (
+        db.create_table('contacts_netobject', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('confirmed', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('quality', self.gf('django.db.models.fields.FloatField')(default=0.0)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('weight', self.gf('django.db.models.fields.FloatField')(default=0.1)),
-            ('source', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contactdb.Source'], null=True, blank=True)),
+            ('source', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['contacts.Source'], null=True, blank=True)),
             ('editor', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('last_updated', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
-        db.send_create_signal('contactdb', ['NetObject'])
+        db.send_create_signal('contacts', ['NetObject'])
 
         # Adding model 'ASN'
-        db.create_table('contactdb_asn', (
-            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contactdb.NetObject'], unique=True)),
+        db.create_table('contacts_asn', (
+            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contacts.NetObject'], unique=True)),
             ('asn', self.gf('django.db.models.fields.IntegerField')(primary_key=True)),
             ('asname', self.gf('django.db.models.fields.CharField')(max_length=500)),
         ))
-        db.send_create_signal('contactdb', ['ASN'])
+        db.send_create_signal('contacts', ['ASN'])
 
         # Adding model 'Inetnum'
-        db.create_table('contactdb_inetnum', (
-            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contactdb.NetObject'], unique=True, primary_key=True)),
+        db.create_table('contacts_inetnum', (
+            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contacts.NetObject'], unique=True, primary_key=True)),
             ('inet', self.gf('django.db.models.fields.GenericIPAddressField')(max_length=39)),
         ))
-        db.send_create_signal('contactdb', ['Inetnum'])
+        db.send_create_signal('contacts', ['Inetnum'])
 
         # Adding model 'IPAddress'
-        db.create_table('contactdb_ipaddress', (
-            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contactdb.NetObject'], unique=True, primary_key=True)),
+        db.create_table('contacts_ipaddress', (
+            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contacts.NetObject'], unique=True, primary_key=True)),
             ('ip', self.gf('django.db.models.fields.GenericIPAddressField')(max_length=39)),
         ))
-        db.send_create_signal('contactdb', ['IPAddress'])
+        db.send_create_signal('contacts', ['IPAddress'])
 
         # Adding model 'Hostname'
-        db.create_table('contactdb_hostname', (
-            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contactdb.NetObject'], unique=True, primary_key=True)),
+        db.create_table('contacts_hostname', (
+            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contacts.NetObject'], unique=True, primary_key=True)),
             ('fqdn', self.gf('django.db.models.fields.CharField')(max_length=1000)),
         ))
-        db.send_create_signal('contactdb', ['Hostname'])
+        db.send_create_signal('contacts', ['Hostname'])
 
         # Adding model 'Domainname'
-        db.create_table('contactdb_domainname', (
-            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contactdb.NetObject'], unique=True, primary_key=True)),
+        db.create_table('contacts_domainname', (
+            ('netobject_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['contacts.NetObject'], unique=True, primary_key=True)),
             ('domain', self.gf('django.db.models.fields.CharField')(max_length=1000)),
         ))
-        db.send_create_signal('contactdb', ['Domainname'])
+        db.send_create_signal('contacts', ['Domainname'])
 
 
     def backwards(self, orm):
         
         # Deleting model 'Countrycode'
-        db.delete_table('contactdb_countrycode')
+        db.delete_table('contacts_countrycode')
 
         # Deleting model 'AirportCode'
-        db.delete_table('contactdb_airportcode')
+        db.delete_table('contacts_airportcode')
 
         # Deleting model 'PGPKey'
-        db.delete_table('contactdb_pgpkey')
+        db.delete_table('contacts_pgpkey')
 
         # Deleting model 'Source'
-        db.delete_table('contactdb_source')
+        db.delete_table('contacts_source')
 
         # Deleting model 'Organisation'
-        db.delete_table('contactdb_organisation')
+        db.delete_table('contacts_organisation')
 
         # Removing M2M table for field vouching_vouched_by on 'Organisation'
-        db.delete_table('contactdb_organisation_vouching_vouched_by')
+        db.delete_table('contacts_organisation_vouching_vouched_by')
 
         # Deleting model 'Person'
-        db.delete_table('contactdb_person')
+        db.delete_table('contacts_person')
 
         # Deleting model 'NetObject'
-        db.delete_table('contactdb_netobject')
+        db.delete_table('contacts_netobject')
 
         # Deleting model 'ASN'
-        db.delete_table('contactdb_asn')
+        db.delete_table('contacts_asn')
 
         # Deleting model 'Inetnum'
-        db.delete_table('contactdb_inetnum')
+        db.delete_table('contacts_inetnum')
 
         # Deleting model 'IPAddress'
-        db.delete_table('contactdb_ipaddress')
+        db.delete_table('contacts_ipaddress')
 
         # Deleting model 'Hostname'
-        db.delete_table('contactdb_hostname')
+        db.delete_table('contacts_hostname')
 
         # Deleting model 'Domainname'
-        db.delete_table('contactdb_domainname')
+        db.delete_table('contacts_domainname')
 
 
     models = {
@@ -205,7 +205,7 @@ class Migration(SchemaMigration):
         },
         'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 10, 22, 16, 5, 1, 246893, tzinfo=<UTC>)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 10, 22, 16, 41, 6, 596758, tzinfo=<UTC>)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -213,52 +213,52 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 10, 22, 16, 5, 1, 246801, tzinfo=<UTC>)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2012, 10, 22, 16, 41, 6, 596649, tzinfo=<UTC>)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
-        'contactdb.airportcode': {
+        'contacts.airportcode': {
             'Meta': {'object_name': 'AirportCode'},
             'code': ('django.db.models.fields.CharField', [], {'max_length': '3'}),
-            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.Countrycode']", 'null': 'True', 'blank': 'True'}),
+            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.Countrycode']", 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'contactdb.asn': {
-            'Meta': {'object_name': 'ASN', '_ormbases': ['contactdb.NetObject']},
+        'contacts.asn': {
+            'Meta': {'object_name': 'ASN', '_ormbases': ['contacts.NetObject']},
             'asn': ('django.db.models.fields.IntegerField', [], {'primary_key': 'True'}),
             'asname': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
-            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contactdb.NetObject']", 'unique': 'True'})
+            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contacts.NetObject']", 'unique': 'True'})
         },
-        'contactdb.countrycode': {
+        'contacts.countrycode': {
             'Meta': {'object_name': 'Countrycode'},
             'cc': ('django.db.models.fields.CharField', [], {'max_length': '2', 'primary_key': 'True'}),
             'cc3': ('django.db.models.fields.CharField', [], {'max_length': '3', 'null': 'True', 'blank': 'True'}),
             'country_name': ('django.db.models.fields.CharField', [], {'max_length': '300'})
         },
-        'contactdb.domainname': {
-            'Meta': {'object_name': 'Domainname', '_ormbases': ['contactdb.NetObject']},
+        'contacts.domainname': {
+            'Meta': {'object_name': 'Domainname', '_ormbases': ['contacts.NetObject']},
             'domain': ('django.db.models.fields.CharField', [], {'max_length': '1000'}),
-            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contactdb.NetObject']", 'unique': 'True', 'primary_key': 'True'})
+            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contacts.NetObject']", 'unique': 'True', 'primary_key': 'True'})
         },
-        'contactdb.hostname': {
-            'Meta': {'object_name': 'Hostname', '_ormbases': ['contactdb.NetObject']},
+        'contacts.hostname': {
+            'Meta': {'object_name': 'Hostname', '_ormbases': ['contacts.NetObject']},
             'fqdn': ('django.db.models.fields.CharField', [], {'max_length': '1000'}),
-            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contactdb.NetObject']", 'unique': 'True', 'primary_key': 'True'})
+            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contacts.NetObject']", 'unique': 'True', 'primary_key': 'True'})
         },
-        'contactdb.inetnum': {
-            'Meta': {'object_name': 'Inetnum', '_ormbases': ['contactdb.NetObject']},
+        'contacts.inetnum': {
+            'Meta': {'object_name': 'Inetnum', '_ormbases': ['contacts.NetObject']},
             'inet': ('django.db.models.fields.GenericIPAddressField', [], {'max_length': '39'}),
-            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contactdb.NetObject']", 'unique': 'True', 'primary_key': 'True'})
+            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contacts.NetObject']", 'unique': 'True', 'primary_key': 'True'})
         },
-        'contactdb.ipaddress': {
-            'Meta': {'object_name': 'IPAddress', '_ormbases': ['contactdb.NetObject']},
+        'contacts.ipaddress': {
+            'Meta': {'object_name': 'IPAddress', '_ormbases': ['contacts.NetObject']},
             'ip': ('django.db.models.fields.GenericIPAddressField', [], {'max_length': '39'}),
-            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contactdb.NetObject']", 'unique': 'True', 'primary_key': 'True'})
+            'netobject_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['contacts.NetObject']", 'unique': 'True', 'primary_key': 'True'})
         },
-        'contactdb.netobject': {
+        'contacts.netobject': {
             'Meta': {'object_name': 'NetObject'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'confirmed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -267,17 +267,17 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_updated': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'quality': ('django.db.models.fields.FloatField', [], {'default': '0.0'}),
-            'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.Source']", 'null': 'True', 'blank': 'True'}),
+            'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.Source']", 'null': 'True', 'blank': 'True'}),
             'weight': ('django.db.models.fields.FloatField', [], {'default': '0.1'})
         },
-        'contactdb.organisation': {
+        'contacts.organisation': {
             'Meta': {'object_name': 'Organisation'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'business_hh_end': ('django.db.models.fields.TimeField', [], {}),
             'business_hh_start': ('django.db.models.fields.TimeField', [], {}),
             'city': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'confirmed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.Countrycode']"}),
+            'country': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.Countrycode']"}),
             'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_established': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '256'}),
@@ -291,12 +291,12 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '1000'}),
             'nesting': ('django.db.models.fields.CharField', [], {'max_length': '5000', 'null': 'True', 'blank': 'True'}),
             'org_path': ('django.db.models.fields.CharField', [], {'max_length': '5000', 'null': 'True', 'blank': 'True'}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.Organisation']", 'null': 'True', 'blank': 'True'}),
-            'pgp_key': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.PGPKey']", 'null': 'True', 'blank': 'True'}),
+            'parent': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.Organisation']", 'null': 'True', 'blank': 'True'}),
+            'pgp_key': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.PGPKey']", 'null': 'True', 'blank': 'True'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'pobox': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'protection_profile': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
-            'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.Source']"}),
+            'source': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.Source']"}),
             'street': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
             'ti_url': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
             'timezone': ('django.db.models.fields.CharField', [], {'max_length': '10', 'null': 'True', 'blank': 'True'}),
@@ -305,14 +305,14 @@ class Migration(SchemaMigration):
             'website': ('django.db.models.fields.URLField', [], {'max_length': '1000', 'null': 'True', 'blank': 'True'}),
             'zipcode': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'})
         },
-        'contactdb.person': {
+        'contacts.person': {
             'Meta': {'object_name': 'Person'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'organisation': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contactdb.Organisation']"}),
+            'organisation': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contacts.Organisation']"}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
         },
-        'contactdb.pgpkey': {
+        'contacts.pgpkey': {
             'Meta': {'object_name': 'PGPKey'},
             'pgp_key': ('django.db.models.fields.TextField', [], {}),
             'pgp_key_created': ('django.db.models.fields.DateTimeField', [], {}),
@@ -321,7 +321,7 @@ class Migration(SchemaMigration):
             'pgp_key_id': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'primary_key': 'True'}),
             'pgp_key_trust': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
-        'contactdb.source': {
+        'contacts.source': {
             'Meta': {'object_name': 'Source'},
             'name': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'primary_key': 'True'}),
             'reliability': ('django.db.models.fields.FloatField', [], {'default': '0.0'})
@@ -335,4 +335,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['contactdb']
+    complete_apps = ['contacts']

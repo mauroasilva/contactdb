@@ -1,14 +1,14 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-from contactdb.models import Entity
-from contactdb.models import Person
-from contactdb.models import Organisation
-from contactdb.models import Countrycode
-from contactdb.models import Source
-from contactdb.models import Tag
-from contactdb.models import ASN
-from contactdb.models import Inetnum
+from contacts.models import Entity
+from contacts.models import Person
+from contacts.models import Organisation
+from contacts.models import Countrycode
+from contacts.models import Source
+from contacts.models import Tag
+from contacts.models import ASN
+from contacts.models import Inetnum
 
 
 class CountrycodeSerializer(serializers.ModelSerializer):

@@ -11,33 +11,33 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from contactdb.permissions import IsUserOrReadOnly
-from contactdb.permissions import IsInOrgOrReadOnly
-from contactdb.serializers import UserSerializer
-from contactdb.serializers import GroupSerializer
+from contacts.permissions import IsUserOrReadOnly
+from contacts.permissions import IsInOrgOrReadOnly
+from contacts.serializers import UserSerializer
+from contacts.serializers import GroupSerializer
 
-from contactdb.models import Person
-from contactdb.serializers import PersonSerializer
-from contactdb.filters import PersonFilter
+from contacts.models import Person
+from contacts.serializers import PersonSerializer
+from contacts.filters import PersonFilter
 
-from contactdb.models import Organisation
-from contactdb.serializers import OrganisationSerializer
-from contactdb.filters import OrganisationFilter
+from contacts.models import Organisation
+from contacts.serializers import OrganisationSerializer
+from contacts.filters import OrganisationFilter
 
-from contactdb.models import Countrycode
-from contactdb.serializers import CountrycodeSerializer
+from contacts.models import Countrycode
+from contacts.serializers import CountrycodeSerializer
 
-from contactdb.models import Source
-from contactdb.serializers import SourceSerializer
+from contacts.models import Source
+from contacts.serializers import SourceSerializer
 
-from contactdb.models import Tag
-from contactdb.serializers import TagSerializer
+from contacts.models import Tag
+from contacts.serializers import TagSerializer
 
-from contactdb.models import ASN
-from contactdb.serializers import ASNSerializer
+from contacts.models import ASN
+from contacts.serializers import ASNSerializer
 
-from contactdb.models import Inetnum
-from contactdb.serializers import InetnumSerializer
+from contacts.models import Inetnum
+from contacts.serializers import InetnumSerializer
 
 import gnupg
 import os

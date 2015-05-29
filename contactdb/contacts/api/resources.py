@@ -1,6 +1,6 @@
 from tastypie.resources import ModelResource
 from tastypie.constants import ALL
-from contactdb.models import *
+from contacts.models import *
 
 
 # NOTE: these classes are semi-automatically generated via scripts/gen-api.sh

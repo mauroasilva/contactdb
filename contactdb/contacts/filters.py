@@ -1,7 +1,7 @@
 import django_filters
 
-from contactdb.models import Organisation
-from contactdb.models import Person
+from contacts.models import Organisation
+from contacts.models import Person
 
 
 class OrganisationFilter(django_filters.FilterSet):

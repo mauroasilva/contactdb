@@ -115,7 +115,7 @@ FIRST DB import
 
 whois proxy / whowas service
 ---------------------------
-It would be great to use the certdir project to also have a whowas service. Idea:
+It would be great to use the contactdb project to also have a whowas service. Idea:
 query a whois object and the DB will do that for you as a proxy but also save the result, timestamp it and it can read from the cache if needed
 
 

@@ -1,10 +1,10 @@
-from contactdb.models import Organisation, Person
-from contactdb.models import Source, Countrycode, Tag
-from contactdb.models import ASN, Inetnum
-from contactdb.models import OtherCommunicationChannel, OTRFingerprint
+from contacts.models import Organisation, Person
+from contacts.models import Source, Countrycode, Tag
+from contacts.models import ASN, Inetnum
+from contacts.models import OtherCommunicationChannel, OTRFingerprint
 from django.contrib import admin
 
-from contactdb.inetnumadmin import InetnumAdminPage
+from contacts.inetnumadmin import InetnumAdminPage
 
 
 def createInlineAdmin(model_class, number_of_lines=0, key_name=None):

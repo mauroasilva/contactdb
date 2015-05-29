@@ -26,7 +26,7 @@ virtualenv virtenv
 echo export CONTACTDB_HOME=$(pwd) >> ./virtenv/bin/activate
 echo export GNUPGHOME=$(pwd)/.gnupg >> ./virtenv/bin/activate
 echo export PYTHONPATH=\$PYTHONPATH:$(pwd) >> ./virtenv/bin/activate
-echo export DJANGO_SETTINGS_MODULE='certdir.settings' >> ./virtenv/bin/activate
+echo export DJANGO_SETTINGS_MODULE='contactdb.settings' >> ./virtenv/bin/activate
 
 . ./virtenv/bin/activate
 pip install -r requirements.txt --upgrade

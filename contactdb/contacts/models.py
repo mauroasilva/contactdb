@@ -4,7 +4,7 @@ from django.db.models import Model, CharField, FloatField, ForeignKey, \
     OneToOneField
 from django.contrib.auth.models import User
 
-from contactdb.inetnum import InetnumModel
+from contacts.inetnum import InetnumModel
 
 from datetime import datetime
 

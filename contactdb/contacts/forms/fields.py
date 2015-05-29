@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 import json
 
-from contactdb.forms.widgets import JSONListToNewlineWidget, JSONWidget
+from contacts.forms.widgets import JSONListToNewlineWidget, JSONWidget
 
 
 class JSONListToNewlineField(forms.CharField):

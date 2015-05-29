@@ -1,5 +1,5 @@
 from django.db import models
-from contactdb.forms.fields import JSONFormField
+from contacts.forms.fields import JSONFormField
 
 import json
 

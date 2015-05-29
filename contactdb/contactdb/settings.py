@@ -1,4 +1,4 @@
-# Django settings for certdir project.
+# Django settings for contactdb project.
 
 import os
 
@@ -102,10 +102,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'certdir.urls'
+ROOT_URLCONF = 'contactdb.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'certdir.wsgi.application'
+WSGI_APPLICATION = 'contactdb.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -127,7 +127,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'rest_framework',
     'rest_framework.authtoken',
-    'contactdb',
+    'contacts',
 )
 
 # A sample logging configuration. The only tangible logging

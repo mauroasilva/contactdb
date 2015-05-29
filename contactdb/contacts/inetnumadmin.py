@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from contactdb.models import Inetnum
+from contacts.models import Inetnum
 from django.core.exceptions import ValidationError
 
 class InetnumFormField(forms.GenericIPAddressField):
